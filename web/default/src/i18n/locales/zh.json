@@ -4353,6 +4353,24 @@
     "Zero retention": "零数据保留",
     "Zhipu": "智谱",
     "Zhipu V4": "智谱 V4",
-    "Zoom": "缩放"
+    "Zoom": "缩放",
+    "a sharper front door": "更利落的统一入口",
+    "A private model gateway with": "一个私有化模型网关，给你",
+    "API gateway, billing relay, and upstream control.": "API 网关、计费中继与上游控制一体化。",
+    "Cost visibility": "成本可见",
+    "Custom deployment by VibeOpus.": "由 VibeOpus 定制部署。",
+    "Fine-grained channels, quotas, and pricing that operators can actually audit.": "把渠道、额度和定价做成运维可审计的明确面板。",
+    "Keep your own upstream mix, failover logic, and user access under your rules.": "保留你自己的上游组合、熔断策略与访问规则。",
+    "Manual recharge and channel replenishment": "人工充值与通道补量",
+    "OpenAI, Claude, Gemini, Codex, and image endpoints under one roof.": "OpenAI、Claude、Gemini、Codex 与图像接口统一收口。",
+    "Operator Notes": "运维备注",
+    "operator visibility": "运维可见性",
+    "Private control": "私有掌控",
+    "Curated model routing": "精选模型路由",
+    "QQ top-up": "加 QQ 充值",
+    "QQ top-up QR": "QQ 充值二维码",
+    "Scan the QR code to add QQ for balance top-up, replenishment, or custom upstream support.": "扫码添加 QQ，可用于余额充值、通道补量和定制上游支持。",
+    "Unified relay": "统一中继",
+    "VibeOpus Gateway": "VibeOpus 网关"
   }
 }

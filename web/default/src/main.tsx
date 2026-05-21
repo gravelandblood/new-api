@@ -91,6 +91,15 @@ declare module '@tanstack/react-router' {
 
 // Render the app
 const rootElement = document.getElementById('root')!
+
+function normalizeBrandName(name: string | undefined) {
+  const raw = (name || '').trim()
+  if (!raw || raw.toLowerCase() === 'new api' || raw.toLowerCase() === 'newapi') {
+    return 'VibeOpus'
+  }
+  return raw
+}
+
 // Set document.title and favicon from cached status, then refresh from network
 ;(function initSystemBranding() {
   try {
@@ -107,7 +116,7 @@ const rootElement = document.getElementById('root')!
       const saved = localStorage.getItem('status')
       if (saved) {
         const s = JSON.parse(saved)
-        if (s?.system_name) apply(s.system_name)
+        if (s?.system_name) apply(normalizeBrandName(s.system_name))
         if (s?.logo) applyFaviconToDom(s.logo)
       }
     } catch {
@@ -117,9 +126,15 @@ const rootElement = document.getElementById('root')!
     getStatus()
       .then((s) => {
         if (s?.system_name) {
-          apply(s.system_name as string)
+          apply(normalizeBrandName(s.system_name as string))
           try {
-            localStorage.setItem('status', JSON.stringify(s))
+            localStorage.setItem(
+              'status',
+              JSON.stringify({
+                ...s,
+                system_name: normalizeBrandName(s.system_name as string),
+              })
+            )
           } catch {
             /* empty */
           }

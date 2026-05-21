@@ -16,8 +16,8 @@ const DEFAULT_HEADER_NAV_MODULES = {
   console: true,
   pricing: { enabled: true, requireAuth: false },
   rankings: { enabled: true, requireAuth: false },
-  docs: true,
-  about: true,
+  docs: false,
+  about: false,
 }
 
 function parseAccessModule(
@@ -124,20 +124,6 @@ export function useTopNavLinks(): TopNavLink[] {
   if (rankings && typeof rankings === 'object' && rankings.enabled) {
     const disabled = rankings.requireAuth && !isAuthed
     links.push({ title: t('Rankings'), href: '/rankings', disabled })
-  }
-
-  // Docs (supports external links)
-  if (modules?.docs !== false) {
-    if (docsLink) {
-      links.push({ title: t('Docs'), href: docsLink, external: true })
-    } else {
-      links.push({ title: t('Docs'), href: '/docs' })
-    }
-  }
-
-  // About
-  if (modules?.about !== false) {
-    links.push({ title: t('About'), href: '/about' })
   }
 
   return links

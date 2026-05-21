@@ -8,8 +8,8 @@ import {
 const defaultSiteSettings: SiteSettings = {
   'theme.frontend': 'default',
   Notice: '',
-  SystemName: 'New API',
-  Logo: '',
+  SystemName: 'VibeOpus',
+  Logo: '/vibeopus-logo-icon.png',
   Footer: '',
   About: '',
   HomePageContent: '',

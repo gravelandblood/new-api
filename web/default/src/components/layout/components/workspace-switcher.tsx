@@ -45,7 +45,7 @@ type WorkspaceSwitcherProps = {
  */
 export function WorkspaceSwitcher({
   workspaces,
-  defaultName = 'New API',
+  defaultName = 'VibeOpus',
   defaultVersion,
   variant = 'sidebar',
 }: WorkspaceSwitcherProps) {
@@ -144,7 +144,7 @@ export function WorkspaceSwitcher({
         >
           {index === 0 ? (
             <div className='flex size-6 items-center justify-center overflow-hidden rounded-sm border'>
-              <img src={logo} alt='Logo' className='size-full object-cover' />
+              <img src={logo} alt='Logo' className='size-full object-contain' />
             </div>
           ) : (
             <div className='flex size-6 items-center justify-center rounded-sm border'>
@@ -168,7 +168,7 @@ export function WorkspaceSwitcher({
           <img
             src={logo}
             alt={t('Logo')}
-            className='size-full rounded-md object-cover'
+            className='size-full rounded-md object-contain'
           />
         </div>
       )
@@ -223,7 +223,7 @@ export function WorkspaceSwitcher({
           <img
             src={logo}
             alt={t('Logo')}
-            className='size-full rounded-lg object-cover'
+            className='size-full rounded-lg object-contain'
           />
         </div>
       )}
