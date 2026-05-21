@@ -22,7 +22,7 @@ var TopUpLink = ""
 var themeValue atomic.Value // stores string; safe for concurrent read/write
 
 func init() {
-	themeValue.Store("classic")
+	themeValue.Store("default")
 }
 
 func GetTheme() string {
@@ -32,7 +32,7 @@ func GetTheme() string {
 // SetTheme updates the frontend theme atomically.
 // Only "default" and "classic" are accepted; other values are silently ignored.
 func SetTheme(t string) {
-	if t == "default" || t == "classic" {
+	if t == "default" {
 		themeValue.Store(t)
 	}
 }
@@ -43,9 +43,6 @@ func SetTheme(t string) {
 // known prefixes so it is safe to call with arbitrary suffixes and query
 // strings.
 func ThemeAwarePath(suffix string) string {
-	if GetTheme() != "default" {
-		return suffix
-	}
 	switch {
 	case strings.HasPrefix(suffix, "/console/topup"):
 		return strings.Replace(suffix, "/console/topup", "/wallet", 1)

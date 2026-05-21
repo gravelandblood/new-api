@@ -10,7 +10,7 @@ DEV_SQLITE_PATH ?= one-api.db
 
 .PHONY: all build-frontend build-frontend-classic build-all-frontends start-backend dev dev-api dev-api-rebuild dev-web dev-web-classic reset-setup
 
-all: build-all-frontends start-backend
+all: build-frontend start-backend
 
 build-frontend:
 	@echo "Building default frontend..."
@@ -20,7 +20,7 @@ build-frontend-classic:
 	@echo "Building classic frontend..."
 	@cd $(FRONTEND_CLASSIC_DIR) && bun install && VITE_REACT_APP_VERSION=$(cat ../../VERSION) bun run build
 
-build-all-frontends: build-frontend build-frontend-classic
+build-all-frontends: build-frontend
 
 start-backend:
 	@echo "Starting backend dev server..."

@@ -24,7 +24,6 @@ import {
 } from './section-registry.tsx'
 
 const defaultSiteSettings: SiteSettings = {
-  'theme.frontend': 'default',
   Notice: '',
   SystemName: 'VibeOpus',
   Logo: '/vibeopus-logo-icon.png',
