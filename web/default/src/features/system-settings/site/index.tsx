@@ -26,7 +26,7 @@ import {
 const defaultSiteSettings: SiteSettings = {
   Notice: '',
   SystemName: 'VibeOpus',
-  Logo: '/vibeopus-logo-icon.png',
+  Logo: '/vibeopus-logo-icon-only.png',
   Footer: '',
   About: '',
   HomePageContent: '',
