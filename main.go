@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"embed"
 	"fmt"
 	"log"
 	"net/http"
@@ -34,18 +33,6 @@ import (
 
 	_ "net/http/pprof"
 )
-
-//go:embed web/default/dist
-var buildFS embed.FS
-
-//go:embed web/default/dist/index.html
-var indexPage []byte
-
-//go:embed web/classic/dist
-var classicBuildFS embed.FS
-
-//go:embed web/classic/dist/index.html
-var classicIndexPage []byte
 
 func main() {
 	startTime := time.Now()
@@ -200,11 +187,20 @@ func main() {
 	if port == "" {
 		port = strconv.Itoa(*common.Port)
 	}
+	bindAddr := os.Getenv("BIND_ADDR")
+	if bindAddr == "" {
+		bindAddr = *common.BindAddr
+	}
+	if bindAddr == "" {
+		bindAddr = ":" + port
+	} else if !strings.Contains(bindAddr, ":") {
+		bindAddr = bindAddr + ":" + port
+	}
 
 	// Log startup success message
 	common.LogStartupSuccess(startTime, port)
 
-	err = server.Run(":" + port)
+	err = server.Run(bindAddr)
 	if err != nil {
 		common.FatalLog("failed to start HTTP server: " + err.Error())
 	}
@@ -235,7 +231,6 @@ func InjectGoogleAnalytics() {
 	analyticsInjectBuilder := &strings.Builder{}
 	if os.Getenv("GOOGLE_ANALYTICS_ID") != "" {
 		gaID := os.Getenv("GOOGLE_ANALYTICS_ID")
-		// Google Analytics 4 (gtag.js)
 		analyticsInjectBuilder.WriteString("<script async src=\"https://www.googletagmanager.com/gtag/js?id=")
 		analyticsInjectBuilder.WriteString(gaID)
 		analyticsInjectBuilder.WriteString("\"></script>")

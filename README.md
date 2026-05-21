@@ -120,6 +120,28 @@ nano docker-compose.yml
 docker-compose up -d
 ```
 
+### Separate frontend/backend deployment
+
+If you want to stop building images on the server entirely, split frontend and backend:
+
+```bash
+# Build frontend locally
+cd web/default
+bun install
+bun run build
+
+# Build backend locally
+go build -o dist/new-api.exe .
+
+# Deploy on the server
+sh deploy/scripts/deploy.sh
+```
+
+In this mode:
+- Frontend updates only replace `web/default/dist`
+- Backend updates only replace `dist/new-api.exe`
+- Nginx serves static files and proxies `/api`
+
 <details>
 <summary><strong>Using Docker Commands</strong></summary>
 

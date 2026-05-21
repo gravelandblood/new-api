@@ -120,6 +120,28 @@ nano docker-compose.yml
 docker-compose up -d
 ```
 
+### 前后端分离部署
+
+如果你想彻底不在服务器上构建镜像，可以改成前后端分离：
+
+```bash
+# 本地构建前端
+cd web/default
+bun install
+bun run build
+
+# 本地构建后端
+go build -o dist/new-api.exe .
+
+# 服务器部署
+sh deploy/scripts/deploy.sh
+```
+
+这套方式里：
+- 前端只更新 `web/default/dist`
+- 后端只更新 `dist/new-api.exe`
+- Nginx 负责前端静态文件和 `/api` 反代
+
 <details>
 <summary><strong>使用 Docker 命令</strong></summary>
 

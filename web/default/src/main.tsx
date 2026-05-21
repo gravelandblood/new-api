@@ -14,6 +14,7 @@ import { getStatus } from '@/lib/api'
 import '@/lib/dayjs'
 import { applyFaviconToDom } from '@/lib/dom-utils'
 import { handleServerError } from '@/lib/handle-server-error'
+import { normalizeLogoUrl } from '@/lib/constants'
 import { DirectionProvider } from './context/direction-provider'
 import { FontProvider } from './context/font-provider'
 import { ThemeProvider } from './context/theme-provider'
@@ -117,7 +118,7 @@ function normalizeBrandName(name: string | undefined) {
       if (saved) {
         const s = JSON.parse(saved)
         if (s?.system_name) apply(normalizeBrandName(s.system_name))
-        if (s?.logo) applyFaviconToDom(s.logo)
+        if (s?.logo) applyFaviconToDom(normalizeLogoUrl(s.logo))
       }
     } catch {
       /* empty */
@@ -133,13 +134,14 @@ function normalizeBrandName(name: string | undefined) {
               JSON.stringify({
                 ...s,
                 system_name: normalizeBrandName(s.system_name as string),
+                logo: normalizeLogoUrl(s.logo as string | undefined),
               })
             )
           } catch {
             /* empty */
           }
         }
-        if (s?.logo) applyFaviconToDom(s.logo as string)
+        if (s?.logo) applyFaviconToDom(normalizeLogoUrl(s.logo as string))
       })
       .catch(() => {
         /* empty */

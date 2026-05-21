@@ -1,0 +1,65 @@
+services:
+  backend:
+    image: ${BACKEND_IMAGE:-your-registry/new-api-backend:latest}
+    container_name: vibeopus-backend
+    restart: always
+    command: --log-dir /app/logs
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/data
+      - ./logs:/app/logs
+    environment:
+      - SQL_DSN=postgresql://root:123456@postgres:5432/new-api
+      - REDIS_CONN_STRING=redis://:123456@redis:6379
+      - TZ=Asia/Shanghai
+      - ERROR_LOG_ENABLED=true
+      - BATCH_UPDATE_ENABLED=true
+      - NODE_NAME=vibeopus-backend-1
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - vibeopus-network
+
+  frontend:
+    image: nginx:1.27-alpine
+    container_name: vibeopus-frontend
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./web/default/dist:/var/www/vibeopus:ro
+      - ./nginx/frontend.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - backend
+    networks:
+      - vibeopus-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: vibeopus-redis
+    restart: always
+    command: ["redis-server", "--requirepass", "123456"]
+    networks:
+      - vibeopus-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: vibeopus-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: new-api
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - vibeopus-network
+
+volumes:
+  pg_data:
+
+networks:
+  vibeopus-network:
+    driver: bridge

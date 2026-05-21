@@ -1,10 +1,8 @@
 import { Link } from '@tanstack/react-router'
-import { ArrowRight, CircleDollarSign, ShieldCheck } from 'lucide-react'
+import { ArrowRight, CircleDollarSign } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useSystemConfig } from '@/hooks/use-system-config'
-import { DEFAULT_LOGO_FULL } from '@/lib/constants'
 import { Button } from '@/components/ui/button'
-import { HeroTerminalDemo } from '../hero-terminal-demo'
 
 interface HeroProps {
   className?: string
@@ -14,6 +12,13 @@ interface HeroProps {
 export function Hero(props: HeroProps) {
   const { t } = useTranslation()
   const { systemName } = useSystemConfig()
+  const supportedModels = [
+    'gpt-5.5',
+    'gemini-3.5-flash',
+    'claude-4.7-opus',
+    'image2',
+    'nano-banana-pro',
+  ]
 
   return (
     <section className='relative z-10 flex flex-col items-center overflow-hidden px-6 pt-28 pb-20 md:pt-36 md:pb-24'>
@@ -47,21 +52,14 @@ export function Hero(props: HeroProps) {
           style={{ animationDelay: '0ms' }}
         >
           <img
-            src={DEFAULT_LOGO_FULL}
+            src='/vibeopus-logo-full.png'
             alt={systemName}
-            className='h-auto w-[min(78vw,28rem)] object-contain drop-shadow-[0_20px_40px_rgba(53,35,20,0.12)]'
+            className='h-auto w-[min(68vw,22rem)] object-contain drop-shadow-[0_18px_34px_rgba(53,35,20,0.12)]'
           />
-        </div>
-        <div
-          className='landing-animate-fade-up mb-6 inline-flex items-center gap-2 rounded-full border border-[rgba(120,76,39,0.18)] bg-white/70 px-4 py-1.5 text-[11px] font-semibold tracking-[0.2em] text-[rgba(108,67,35,0.85)] uppercase shadow-[0_20px_60px_-40px_rgba(94,53,24,0.55)] backdrop-blur'
-          style={{ animationDelay: '60ms' }}
-        >
-          <ShieldCheck className='size-3.5' />
-          {t('VibeOpus Gateway')}
         </div>
         <h1
           className='landing-animate-fade-up text-[clamp(2.4rem,6.5vw,5.4rem)] leading-[1.02] font-semibold tracking-[-0.04em] text-[rgb(36,24,16)]'
-          style={{ animationDelay: '100ms' }}
+          style={{ animationDelay: '60ms' }}
         >
           {t('A private model gateway with')}
           <br />
@@ -69,57 +67,34 @@ export function Hero(props: HeroProps) {
             {t('a sharper front door')}
           </span>
         </h1>
-        <p
-          className='landing-animate-fade-up mt-6 max-w-3xl text-base leading-relaxed text-[rgba(72,52,36,0.84)] opacity-0 md:text-lg'
-          style={{ animationDelay: '140ms' }}
-        >
-          {systemName}{' '}
-          {t(
-            'consolidates upstream models, usage controls, pricing strategy, and routing policies into one clean operator surface.'
-          )}
-        </p>
         <div
-          className='landing-animate-fade-up mt-7 grid w-full max-w-4xl gap-4 opacity-0 md:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.85fr)]'
-          style={{ animationDelay: '180ms' }}
+          className='landing-animate-fade-up mt-7 grid w-full max-w-5xl items-stretch gap-4 opacity-0 md:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]'
+          style={{ animationDelay: '120ms' }}
         >
-          <div className='rounded-[28px] border border-[rgba(113,74,44,0.16)] bg-white/74 p-6 text-left shadow-[0_26px_80px_-46px_rgba(66,43,28,0.55)] backdrop-blur'>
+          <div className='flex h-full flex-col rounded-[24px] border border-[rgba(113,74,44,0.16)] bg-white/74 p-5 text-left shadow-[0_26px_80px_-46px_rgba(66,43,28,0.55)] backdrop-blur'>
             <p className='text-[11px] font-semibold tracking-[0.24em] text-[rgba(118,75,40,0.78)] uppercase'>
-              {t('Operator Notes')}
+              {t('Supported Models')}
             </p>
-            <div className='mt-4 grid gap-3 text-sm text-[rgba(65,48,34,0.82)] md:grid-cols-3'>
-              <div className='rounded-2xl bg-[rgba(246,238,226,0.95)] p-4'>
-                <p className='font-semibold text-[rgb(59,40,28)]'>
-                  {t('Unified relay')}
-                </p>
-                <p className='mt-1 leading-6'>
-                  {t(
-                    'OpenAI, Claude, Gemini, Codex, and image endpoints under one roof.'
-                  )}
-                </p>
-              </div>
-              <div className='rounded-2xl bg-[rgba(246,238,226,0.95)] p-4'>
-                <p className='font-semibold text-[rgb(59,40,28)]'>
-                  {t('Cost visibility')}
-                </p>
-                <p className='mt-1 leading-6'>
-                  {t(
-                    'Fine-grained channels, quotas, and pricing that operators can actually audit.'
-                  )}
-                </p>
-              </div>
-              <div className='rounded-2xl bg-[rgba(246,238,226,0.95)] p-4'>
-                <p className='font-semibold text-[rgb(59,40,28)]'>
-                  {t('Private control')}
-                </p>
-                <p className='mt-1 leading-6'>
-                  {t(
-                    'Keep your own upstream mix, failover logic, and user access under your rules.'
-                  )}
-                </p>
-              </div>
+            <h2 className='mt-2 text-2xl font-semibold tracking-[-0.03em] text-[rgb(44,29,19)]'>
+              {t('Latest flagship models in one gateway')}
+            </h2>
+            <p className='mt-2 max-w-xl text-sm leading-6 text-[rgba(74,55,41,0.78)]'>
+              {t(
+                'Route text, vision, reasoning, code, and image requests through one unified entrance.'
+              )}
+            </p>
+            <div className='mt-4 grid gap-2 text-sm text-[rgba(49,35,26,0.9)] sm:grid-cols-2'>
+              {supportedModels.map((model) => (
+                <div
+                  key={model}
+                  className='rounded-2xl border border-[rgba(118,75,40,0.12)] bg-[rgba(246,238,226,0.88)] px-3.5 py-2.5 font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]'
+                >
+                  {model}
+                </div>
+              ))}
             </div>
           </div>
-          <div className='rounded-[28px] border border-[rgba(113,74,44,0.16)] bg-[linear-gradient(180deg,rgba(255,252,247,0.92),rgba(244,235,224,0.92))] p-5 text-left shadow-[0_26px_80px_-46px_rgba(66,43,28,0.55)] backdrop-blur'>
+          <div className='flex h-full flex-col rounded-[24px] border border-[rgba(113,74,44,0.16)] bg-[linear-gradient(180deg,rgba(255,252,247,0.92),rgba(244,235,224,0.92))] p-5 text-left shadow-[0_26px_80px_-46px_rgba(66,43,28,0.55)] backdrop-blur'>
             <div className='flex items-center justify-between'>
               <div>
                 <p className='text-[11px] font-semibold tracking-[0.24em] text-[rgba(118,75,40,0.78)] uppercase'>
@@ -131,23 +106,18 @@ export function Hero(props: HeroProps) {
               </div>
               <CircleDollarSign className='size-8 text-[rgb(170,104,55)]' />
             </div>
-            <div className='mt-4 flex items-center justify-center rounded-[24px] bg-white/82 p-4 shadow-inner'>
+            <div className='mt-4 flex flex-1 items-center justify-center rounded-[22px] bg-white/82 p-3 shadow-inner'>
               <img
-                src='/qq-topup-qr.png'
+                src='/qq-topup-qr.jpg'
                 alt={t('QQ top-up QR')}
-                className='h-56 w-56 rounded-3xl object-cover md:h-64 md:w-64'
+                className='aspect-square w-full max-w-[15rem] rounded-2xl object-contain'
               />
             </div>
-            <p className='mt-4 text-sm leading-6 text-[rgba(74,55,41,0.82)]'>
-              {t(
-                'Scan the QR code to add QQ for balance top-up, replenishment, or custom upstream support.'
-              )}
-            </p>
           </div>
         </div>
         <div
           className='landing-animate-fade-up mt-8 flex items-center gap-3 opacity-0'
-          style={{ animationDelay: '220ms' }}
+          style={{ animationDelay: '160ms' }}
         >
           {props.isAuthenticated ? (
             <Button
@@ -178,12 +148,6 @@ export function Hero(props: HeroProps) {
         </div>
       </div>
 
-      <div
-        className='landing-animate-fade-up w-full opacity-0'
-        style={{ animationDelay: '340ms' }}
-      >
-        <HeroTerminalDemo />
-      </div>
     </section>
   )
 }

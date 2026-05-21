@@ -6,7 +6,11 @@ import {
   type SystemConfig,
   DEFAULT_CURRENCY_CONFIG,
 } from '@/stores/system-config-store'
-import { DEFAULT_SYSTEM_NAME, DEFAULT_LOGO } from '@/lib/constants'
+import {
+  DEFAULT_SYSTEM_NAME,
+  DEFAULT_LOGO,
+  normalizeLogoUrl,
+} from '@/lib/constants'
 import { applyFaviconToDom } from '@/lib/dom-utils'
 
 interface UseSystemConfigOptions {
@@ -83,7 +87,7 @@ export function mapStatusDataToConfig(
 
   return {
     systemName: normalizeSystemName(data.system_name),
-    logo: data.logo || DEFAULT_LOGO,
+    logo: normalizeLogoUrl(data.logo),
     footerHtml: data.footer_html,
     demoSiteEnabled: data.demo_site_enabled,
     displayTokenStatEnabled: data.display_token_stat_enabled,

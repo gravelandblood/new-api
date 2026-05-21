@@ -1,6 +1,10 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { DEFAULT_SYSTEM_NAME, DEFAULT_LOGO } from '@/lib/constants'
+import {
+  DEFAULT_SYSTEM_NAME,
+  DEFAULT_LOGO,
+  normalizeLogoUrl,
+} from '@/lib/constants'
 
 export type CurrencyDisplayType = 'USD' | 'CNY' | 'TOKENS' | 'CUSTOM'
 
@@ -76,6 +80,20 @@ export const useSystemConfigStore = create<SystemConfigState>()(
     }),
     {
       name: 'system-config-storage',
+      version: 1,
+      migrate: (persistedState) => {
+        const state = persistedState as Partial<SystemConfigState> | undefined
+        return {
+          ...state,
+          config: state?.config
+            ? {
+                ...state.config,
+                logo: normalizeLogoUrl(state.config.logo),
+              }
+            : state?.config,
+          loadedLogoUrl: normalizeLogoUrl(state?.loadedLogoUrl),
+        }
+      },
       partialize: (state) => ({
         config: state.config,
         loadedLogoUrl: state.loadedLogoUrl,

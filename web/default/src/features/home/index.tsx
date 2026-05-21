@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Markdown } from '@/components/ui/markdown'
 import { PublicLayout } from '@/components/layout'
 import { Footer } from '@/components/layout/components/footer'
-import { Features, Hero, Stats } from './components'
+import { Hero } from './components'
 import { useHomePageContent } from './hooks'
 
 export function Home() {
@@ -45,8 +45,6 @@ export function Home() {
   return (
     <PublicLayout showMainContainer={false}>
       <Hero isAuthenticated={isAuthenticated} />
-      <Stats />
-      <Features />
       <Footer />
     </PublicLayout>
   )

@@ -1,0 +1,17 @@
+[Unit]
+Description=New API backend
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/vibeopus/backend
+ExecStart=/opt/vibeopus/backend/new-api --log-dir /opt/vibeopus/logs --bind 127.0.0.1
+Restart=always
+RestartSec=3
+Environment=PORT=3000
+Environment=TZ=Asia/Shanghai
+Environment=SQL_DSN=postgresql://root:123456@127.0.0.1:5432/new-api
+Environment=REDIS_CONN_STRING=redis://:123456@127.0.0.1:6379
+
+[Install]
+WantedBy=multi-user.target

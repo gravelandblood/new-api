@@ -23,7 +23,9 @@ func SetRouter(router *gin.Engine, assets ThemeAssets) {
 		common.SysLog("FRONTEND_BASE_URL is ignored on master node")
 	}
 	if frontendBaseUrl == "" {
-		SetWebRouter(router, assets)
+		if assets.DefaultIndexPage != nil && assets.ClassicIndexPage != nil {
+			SetWebRouter(router, assets)
+		}
 	} else {
 		frontendBaseUrl = strings.TrimSuffix(frontendBaseUrl, "/")
 		router.NoRoute(func(c *gin.Context) {

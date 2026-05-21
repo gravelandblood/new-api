@@ -19,6 +19,7 @@ var (
 	PrintVersion = flag.Bool("version", false, "print version and exit")
 	PrintHelp    = flag.Bool("help", false, "print help and exit")
 	LogDir       = flag.String("log-dir", "./logs", "specify the log directory")
+	BindAddr     = flag.String("bind", "", "the listening bind address")
 )
 
 func printHelp() {
