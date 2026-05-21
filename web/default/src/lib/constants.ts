@@ -21,8 +21,9 @@ For commercial licensing, please contact support@quantumnous.com
  */
 
 // System Configuration Defaults
-export const DEFAULT_SYSTEM_NAME = 'New API'
-export const DEFAULT_LOGO = '/logo.png'
+export const DEFAULT_SYSTEM_NAME = 'VibeOpus'
+export const DEFAULT_LOGO = '/vibeopus-logo-icon.png'
+export const DEFAULT_LOGO_FULL = '/vibeopus-logo-full.png'
 
 // LocalStorage Keys
 export const STORAGE_KEYS = {

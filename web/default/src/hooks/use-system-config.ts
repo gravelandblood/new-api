@@ -49,6 +49,14 @@ interface StatusApiResponse {
   }
 }
 
+function normalizeSystemName(value: string | undefined): string {
+  const raw = (value || '').trim()
+  if (!raw || raw.toLowerCase() === 'new api' || raw.toLowerCase() === 'newapi') {
+    return DEFAULT_SYSTEM_NAME
+  }
+  return raw
+}
+
 function toNumber(value: unknown, fallback: number): number {
   if (typeof value === 'number' && !Number.isNaN(value)) return value
   if (typeof value === 'string') {
@@ -92,7 +100,7 @@ export function mapStatusDataToConfig(
   }
 
   return {
-    systemName: data.system_name || DEFAULT_SYSTEM_NAME,
+    systemName: normalizeSystemName(data.system_name),
     logo: data.logo || DEFAULT_LOGO,
     footerHtml: data.footer_html,
     demoSiteEnabled: data.demo_site_enabled,
