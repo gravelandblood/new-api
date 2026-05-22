@@ -54,7 +54,7 @@ export function Hero(props: HeroProps) {
           <img
             src='/vibeopus-logo-full.png'
             alt={systemName}
-            className='h-auto w-[min(68vw,22rem)] object-contain drop-shadow-[0_18px_34px_rgba(53,35,20,0.12)]'
+            className='h-auto w-[min(44vw,14rem)] object-contain'
           />
         </div>
         <h1
